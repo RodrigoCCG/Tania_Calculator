@@ -5,5 +5,9 @@ Commando para executar o codigo via prompt de commando: streamlit run calc_tania
 
 
 Finalizado:
+
 Interface: 14/11/2020 23:37
+
 Interpolacao: 15/11/2020 02:30
+
+Eliminacao de Gauss: 15/11/2020 18:25
