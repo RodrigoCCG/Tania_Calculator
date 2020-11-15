@@ -22,7 +22,7 @@ if tipo == 'Interpolacao':
         inter.append(['0','0'])
 
     for i in range(dim):
-        inter[i] = st.text_input("Ponto "+str(i),value=';'.join(inter[i])).split(';')
+        inter[i] = [float(i) for i in st.text_input("Ponto "+str(i),value=';'.join(inter[i])).split(';')]
     df = pd.DataFrame(data=inter,columns=['x','f(x)'])
     st.write("Pontos")
     st.write(df)
@@ -34,6 +34,7 @@ if tipo == 'Interpolacao':
             st.write("Valor de P("+str(x)+")="+str(res[1]))
         elif met == 'Newton':
             res = Interpolacao.newton(x,df,dim)
+            st.title("Resultados")
             st.write(res[0])
             st.write("Valor de P("+str(x)+")="+str(res[1]))
             
@@ -55,10 +56,40 @@ elif tipo == 'Sistema Linear':
     col.append('b')
 
     for i in range(dim):
-        sisl[i] = st.text_input("Linha "+str(i),value=';'.join(sisl[i])).split(';')
-    map(float(),sisl)
+        sisl[i] = [float(i) for i in st.text_input("Linha "+str(i),value=';'.join(sisl[i])).split(';')]
 
     st.write('Sistema')
     df = pd.DataFrame(data=sisl,columns=col)
-
     st.write(df)
+    if st.sidebar.button('Executar'):
+        if met == 'Gauss':
+            res = SL_Direto.Gauss(df,dim)
+            st.title("Resultados")
+            st.write("Matriz fatorada")
+            st.write(res[0])
+            st.write("Valores de x")
+            st.write(res[1])
+
+        elif met == 'LU':
+            res = ('NaN','NaN')
+            st.title("Resultados")
+            st.write("Matriz fatorada")
+            st.write(res[0])
+            st.write("Valores de x")
+            st.write(res[1])
+
+        elif met == 'Jacobi':
+            res = ('NaN','NaN')
+            st.title("Resultados")
+            st.write("Matriz fatorada")
+            st.write(res[0])
+            st.write("Valores de x")
+            st.write(res[1])
+
+        elif met == 'Gauss-Seidel':
+            res = ('NaN','NaN')
+            st.title("Resultados")
+            st.write("Matriz fatorada")
+            st.write(res[0])
+            st.write("Valores de x")
+            st.write(res[1])
