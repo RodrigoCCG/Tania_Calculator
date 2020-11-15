@@ -2,6 +2,17 @@ import numpy as np
 import pandas as pd 
 
 def lagrange(x,df,count):
+    """Realiza a interpolacao de um ponto x pelo metodo de Lagrange
+    dado um conjunto de dados composto por count pontos, 
+    no DataFrame df, separado em colunas x e f(x). Retorna uma tupla com um
+    DataFlame contendo os valores de L, assim como o valor de x interporlado
+    Input: 
+    x:float -Valor a ser interpolado
+    df:pandas.DataFrame -DataFrame constituido de count pontos nas colunas (x,f(x))
+    count:int Quantidade de pontos no Dataframe
+    Output:
+    Tuple - Tupla contendo o Dataframe com os valores de L e o x Interpolado
+    """
     res = pd.DataFrame(columns=['L'])
     for index in range(count):
         thisL = 1
@@ -17,6 +28,17 @@ def lagrange(x,df,count):
     return (res,p)
 
 def newton(x,df,count):
+    """Realiza a interpolacao de um ponto x pelo metodo de Neuton
+    dado um conjunto de dados composto por count pontos, 
+    no DataFrame df, separado em colunas x e f(x). Retorna uma tupla com um
+    DataFlame contendo os valores de F[n, n-1, ..., 1, 0], assim como o valor de x interporlado
+    Input: 
+    x:float -Valor a ser interpolado
+    df:pandas.DataFrame -DataFrame constituido de count pontos nas colunas (x,f(x))
+    count:int Quantidade de pontos no Dataframe
+    Output:
+    Tuple - Tupla contendo o Dataframe com os valores de F[n, n-1, ..., 1, 0] e o x Interpolado
+    """
     res = pd.DataFrame(data=df.loc[range(count),'f(x)'])
     for valor in range(1,count):
         fs=[]
