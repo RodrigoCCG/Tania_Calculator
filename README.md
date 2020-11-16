@@ -13,3 +13,5 @@ Interpolacao: 15/11/2020 02:30
 Eliminacao de Gauss: 15/11/2020 18:25
 
 Fatoracao LU: 15/11/2020 21:05
+
+Metodo Gauss-Jacobi: 15/11/2020 23:15

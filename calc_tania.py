@@ -30,11 +30,13 @@ if tipo == 'Interpolacao':
         if met == 'Lagrange':
             res = Interpolacao.lagrange(x,df,dim)
             st.title("Resultados")
+            st.write("Ls")
             st.write(res[0])
             st.write("Valor de P("+str(x)+")="+str(res[1]))
         elif met == 'Newton':
             res = Interpolacao.newton(x,df,dim)
             st.title("Resultados")
+            st.write("Diferencas")
             st.write(res[0])
             st.write("Valor de P("+str(x)+")="+str(res[1]))
             
@@ -58,6 +60,13 @@ elif tipo == 'Sistema Linear':
     for i in range(dim):
         sisl[i] = [float(i) for i in st.text_input("Linha "+str(i),value=';'.join(sisl[i])).split(';')]
 
+    if met == 'Jacobi' or met == 'Gauss-Seidel':
+        precisao = float(st.sidebar.text_input('Precisao',value=0))
+        x0 = ['0' for i in range(dim)]
+        x0 = [float(i) for i in st.text_input("X0",value=';'.join(x0)).split(';')]
+        x0_df = pd.DataFrame(data=x0,columns=['x'])
+        st.write(x0_df)
+    
     st.write('Sistema')
     df = pd.DataFrame(data=sisl,columns=col)
     st.write(df)
@@ -69,9 +78,19 @@ elif tipo == 'Sistema Linear':
             st.write(res[0])
             st.write("Valores de x")
             st.write(res[1])
+            count=1
+            for i in res[2]:
+                st.header("Passo "+str(count))
+                st.write("Matriz resultante")
+                st.write(i[0])
+                st.write("Matriz em fatoracao")
+                st.write(i[1])
+                count+=1
+
 
         elif met == 'LU':
             res = SL_Direto.LU(df,dim)
+            st.write(LU)
             st.title("Resultados")
             st.write("L")
             st.write(res[0])
@@ -83,12 +102,14 @@ elif tipo == 'Sistema Linear':
             st.write(res[3])
 
         elif met == 'Jacobi':
-            res = ('NaN','NaN')
+            res = SL_Iterativo.Jacobi(df,dim,x0_df,precisao)
             st.title("Resultados")
-            st.write("Matriz fatorada")
+            st.write("Matriz C")
             st.write(res[0])
-            st.write("Valores de x")
+            st.write("Matriz g")
             st.write(res[1])
+            st.write("X")
+            st.write(res[2])
 
         elif met == 'Gauss-Seidel':
             res = ('NaN','NaN')

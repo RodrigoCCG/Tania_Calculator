@@ -16,8 +16,14 @@ def Gauss(df,dim):
     #Cria o dataset de solucao do problema
     res = pd.DataFrame(data = df)
     x_df = pd.DataFrame(data=range(dim),columns = ['x'])
-    g_res = pd.DataFrame(data = df)
-
+    d = []
+    for i in range(dim+1):
+        d.append(0)
+    a =[]
+    for i in range(dim):
+        a.append(d)
+    g_res = pd.DataFrame(data = a,columns = df.columns)
+    passos = []
     for i in range(dim):
         #seleciona o menor pivot
         res = res.sort_values(by=['x'+str(i)],ignore_index=True)
@@ -28,7 +34,8 @@ def Gauss(df,dim):
                 for k in range(j+1,dim):
                     res.iloc[k] = res.iloc[k].sub(res.iloc[j].mul(res.iloc[k,i]).div(res.iloc[j,i]))
                 g_res.iloc[i] = res.iloc[j]
-                res.at[j,0:dim]=0
+                res.at[j,0:dim+1]=0
+                passos.append((g_res.copy(deep=True),res.copy(deep=True)))
                 inserted = True
                 break
         if not inserted:
@@ -43,7 +50,7 @@ def Gauss(df,dim):
             soma -= res.iloc[x_index,j]*x_df.iloc[j]
             j -= 1
         x_df.loc[x_index] = soma/res.iloc[x_index,j]
-    return (res,x_df)
+    return (res,x_df,passos)
 
 def LU(df, dim):
     """
