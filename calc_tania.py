@@ -90,7 +90,6 @@ elif tipo == 'Sistema Linear':
 
         elif met == 'LU':
             res = SL_Direto.LU(df,dim)
-            st.write(LU)
             st.title("Resultados")
             st.write("L")
             st.write(res[0])
