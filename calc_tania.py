@@ -71,12 +71,16 @@ elif tipo == 'Sistema Linear':
             st.write(res[1])
 
         elif met == 'LU':
-            res = ('NaN','NaN')
+            res = SL_Direto.LU(df,dim)
             st.title("Resultados")
-            st.write("Matriz fatorada")
+            st.write("L")
             st.write(res[0])
-            st.write("Valores de x")
+            st.write("U")
             st.write(res[1])
+            st.write("Y")
+            st.write(res[2])
+            st.write("X")
+            st.write(res[3])
 
         elif met == 'Jacobi':
             res = ('NaN','NaN')
