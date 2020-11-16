@@ -112,9 +112,7 @@ elif tipo == 'Sistema Linear':
             st.write(res[2])
 
         elif met == 'Gauss-Seidel':
-            res = ('NaN','NaN')
+            res = SL_Iterativo.Seidel(df,dim,x0_df,precisao)
             st.title("Resultados")
-            st.write("Matriz fatorada")
-            st.write(res[0])
             st.write("Valores de x")
-            st.write(res[1])
+            st.write(res[0])

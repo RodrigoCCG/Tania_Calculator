@@ -60,7 +60,7 @@ def LU(df, dim):
     df: DataFrame contendo o Sistema linear
     dim: quantidade de variaveis e equacoes
     Output:
-    Lista(df,df,df,df): Tupla com dois dataframes, o primeiro contendo a matriz L, o
+    Lista(df,df,df,df): Tupla com quatro dataframes, o primeiro contendo a matriz L, o
     segundo contendo a matriz U, o terceiro os valores de y, e o quarto os valores de X. 
     Retorna uma mensagem de erro se nao foi possivel realizar a eliminacao
     """
